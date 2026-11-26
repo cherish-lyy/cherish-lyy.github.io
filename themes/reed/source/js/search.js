@@ -92,7 +92,8 @@
 
     var low = q.toLowerCase();
     var hits = data.filter(function (p) {
-      var okQ = !low || (p.title + ' ' + p.text).toLowerCase().indexOf(low) !== -1;
+      var hay = (p.title + ' ' + p.text + ' ' + (p.date || '') + ' ' + (p.cats || []).join(' ')).toLowerCase();
+      var okQ = !low || hay.indexOf(low) !== -1;
       var okC = !state.cat || (p.cats || []).indexOf(state.cat) !== -1;
       return okQ && okC;
     });
