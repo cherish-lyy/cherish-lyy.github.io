@@ -8,6 +8,8 @@
   <meta name="author" content="<%= config.author %>">
   <!-- 隐私：跳转到任何外部站点时不发送来源页（Referer） -->
   <meta name="referrer" content="no-referrer">
+  <!-- 隐私：禁止任何搜索引擎收录本站 -->
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <!-- 安全：禁止被嵌入 iframe、禁止 base 标签劫持、禁止外发表单 -->
   <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
   <link rel="icon" type="image/jpeg" href="<%- url_for('images/avatar.jpg') %>">
@@ -36,7 +38,11 @@
   <footer class="site-footer">
     <div class="wrap">
       <p><%= config.author %> · <%= config.subtitle %></p>
-      <p class="foot-note">用 Hexo 搭建 · 内容持续更新中</p>
+      <p class="foot-note">
+        本站内容采用
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank" rel="noopener noreferrer nofollow">CC BY-NC-SA 4.0</a>
+        许可协议 · 用 Hexo 搭建
+      </p>
     </div>
   </footer>
 </body>

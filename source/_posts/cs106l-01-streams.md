@@ -1,11 +1,11 @@
 ---
 title: CS106L 01 · 流（Streams）
-date: 2026-11-26 10:00:00
+date: 2026-11-26 21:00:00
 tags: [CS106L, C++]
 categories: [CS 自学, CS106L]
 ---
 
-这是 CS106L 第一讲的完整笔记（修订版）：四种流（cout / cin / ofstream / ifstream）、`>>` 的行为、`getline` 的坑、字符串流与格式化输出，以及常见错误清单。
+这一篇是 CS106L 第一讲的完整笔记：四种流（cout / cin / ofstream / ifstream）、`>>` 的行为、`getline` 的坑、字符串流与格式化输出，以及 A1 作业里实际踩到的问题清单。
 
 <!-- more -->
 
