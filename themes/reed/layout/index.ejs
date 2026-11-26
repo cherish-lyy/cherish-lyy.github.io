@@ -18,6 +18,11 @@
   var homeCount = {};
   site.categories.each(function(c){ homeCount[c.name] = c.length; });
 %>
+<div class="search-wrap">
+  <input id="search-input" type="search" placeholder="搜索笔记…  （按 / 键快速聚焦）" autocomplete="off" spellcheck="false">
+</div>
+<div id="search-results" class="search-results" hidden></div>
+
 <section class="cat-strip">
   <h2 class="strip-title">分区</h2>
   <div class="strip-items">
@@ -77,3 +82,5 @@
   <% if(page.next){ %><a href="<%- url_for(page.next_link) %>">更早的文章 →</a><% } %>
 </nav>
 <% } %>
+
+<script src="<%- url_for('js/search.js') %>?v=<%= Date.now() %>" defer></script>

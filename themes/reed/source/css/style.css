@@ -207,6 +207,84 @@ a:hover { opacity: .72; }
   white-space: nowrap;
 }
 
+/* ---------- 站内搜索 ---------- */
+.search-wrap {
+  margin-bottom: 32px;
+}
+
+#search-input {
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  outline: none;
+  transition: border-color .18s ease, box-shadow .18s ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#search-input::placeholder { color: #B4AFA3; }
+
+#search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(47, 93, 124, .08);
+}
+
+.search-results { margin-bottom: 40px; }
+
+.search-count {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 12px;
+  letter-spacing: .04em;
+}
+
+.search-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-list li {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.search-list li:last-child { border-bottom: none; }
+
+.search-title {
+  font-family: Georgia, "Songti SC", "Noto Serif SC", serif;
+  font-size: 19px;
+  color: var(--text);
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.search-title:hover { color: var(--accent); opacity: 1; }
+
+.search-snippet {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--text-soft);
+}
+
+.search-snippet mark {
+  background: #FDF0C8;
+  color: inherit;
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+.search-empty {
+  color: var(--muted);
+  font-size: 15px;
+}
+
 /* ---------- 文章卡片 ---------- */
 .post-list {
   display: flex;
@@ -798,6 +876,7 @@ a:hover { opacity: .72; }
   .hero-desc { font-size: 14.5px; margin-bottom: 10px; }
   .hero-tags span { font-size: 11px; padding: 3px 11px; letter-spacing: .02em; }
   .site-header::after { font-size: 18px; letter-spacing: .2em; color: rgba(47, 93, 124, .055); }
+  #search-input { padding: 12px 16px; font-size: 15px; }
   .post-icon { width: 38px; height: 38px; }
   .post-toc { padding: 14px 16px; font-size: 14px; }
   .toc-list { max-height: 240px; }

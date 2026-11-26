@@ -54,6 +54,9 @@ jobs:
           npx hexo clean
           npx hexo generate
 
+      - name: 生成搜索索引
+        run: node tools/make-search.js site/public
+
       - name: 打包
         uses: actions/upload-pages-artifact@v3
         with:
