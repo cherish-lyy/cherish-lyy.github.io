@@ -54,6 +54,7 @@
     });
     catsBox.innerHTML = html;
     catsBox.dataset.built = '1';
+    if (filters) filters.hidden = false;
 
     catsBox.addEventListener('click', function (e) {
       var btn = e.target.closest ? e.target.closest('.cat-tag') : null;
@@ -82,7 +83,6 @@
     var nothing = !q && !state.cat;
     if (nothing) {
       box.hidden = true;
-      if (filters) filters.hidden = true;
       if (list) list.style.display = '';
       if (strip) strip.style.display = '';
       return;
@@ -143,6 +143,9 @@
 
   input.addEventListener('input', render);
   input.addEventListener('focus', load);
+
+  // 页面一加载就先把分类筛选项准备好，不用等用户输入
+  load();
 
   document.addEventListener('keydown', function (e) {
     if (e.key === '/' && document.activeElement !== input && !/input|textarea/i.test(document.activeElement.tagName)) {
