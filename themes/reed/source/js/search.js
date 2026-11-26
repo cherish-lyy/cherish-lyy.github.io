@@ -21,7 +21,7 @@
   function load() {
     if (data || loading) return;
     loading = true;
-    fetch('/search.json')
+    fetch('/search.json?v=' + (window.__BUILD_TS__ || Date.now()))
       .then(function (r) { return r.json(); })
       .then(function (d) {
         data = d;
