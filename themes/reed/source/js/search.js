@@ -121,7 +121,7 @@
     hits.forEach(function (p) {
       html += '<li>'
         + '<div class="search-item-meta">'
-        +   '<time>' + esc(p.date || '') + '</time>'
+        +   '<time>' + esc((p.date || '').slice(0, 10)) + '</time>'
         +   (p.cats || []).map(function (c) { return '<span class="mini-chip">' + esc(c) + '</span>'; }).join('')
         + '</div>'
         + '<a class="search-title" href="' + p.url + '">' + esc(p.title) + '</a>'

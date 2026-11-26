@@ -44,7 +44,7 @@ function walk(dir) {
       const metaMatch = html.match(/<div class="post-meta">([\s\S]*?)<\/div>\s*<\/header>/);
       if (metaMatch) {
         const meta = metaMatch[1];
-        const dm = meta.match(/<time[^>]*>([^<]+)<\/time>/);
+        const dm = meta.match(/<time[^>]*datetime="([^"]+)"[^>]*>/) || meta.match(/<time[^>]*>([^<]+)<\/time>/);
         if (dm) date = dm[1].trim();
         const re = /<a class="chip"[^>]*>([^<]+)<\/a>/g;
         let m;
