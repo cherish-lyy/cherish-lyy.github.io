@@ -1,0 +1,71 @@
+# ============================================
+# 自动发布流水线
+# 作用：你每次把 md 文章传上来，它就自动帮你
+#      把文章变成网页，然后发布到你的网址上。
+# 这个文件不用改，一次配好永久有效。
+# ============================================
+
+name: Deploy Hexo to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 取回仓库文件
+        uses: actions/checkout@v4
+
+      - name: 安装 Node 环境
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 初始化 Hexo
+        run: |
+          npm install -g hexo-cli
+          hexo init site
+          cd site
+          npm install --no-audit --no-fund
+
+      - name: 套用主题与内容
+        run: |
+          rm -rf site/source
+          cp -r source site/source
+          cp _config.yml site/_config.yml
+          rm -rf site/themes/reed
+          cp -r themes/reed site/themes/reed
+
+      - name: 生成网站
+        run: |
+          cd site
+          npx hexo clean
+          npx hexo generate
+
+      - name: 打包
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 发布
+        id: deployment
+        uses: actions/deploy-pages@v4

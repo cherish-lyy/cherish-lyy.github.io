@@ -1,0 +1,79 @@
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-head">
+      <img class="hero-avatar" src="<%- url_for('images/avatar.jpg') %>" alt="<%= config.author %>">
+      <h1 class="hero-name"><%= config.author %></h1>
+    </div>
+    <div class="hero-text">
+      <p class="hero-desc"><%= config.description %></p>
+      <div class="hero-tags">
+        <span>半似清狂半白痴，不须人笑我心知</span>
+        <span>旁观拍手笑疏狂，疏又何妨，狂又何妨</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%
+  var homeCount = {};
+  site.categories.each(function(c){ homeCount[c.name] = c.length; });
+%>
+<section class="cat-strip">
+  <h2 class="strip-title">分区</h2>
+  <div class="strip-items">
+  <% theme.categories.forEach(function(g){ %>
+    <a class="cat-pill" href="<%- url_for('categories/') %>#<%= g.name %>">
+      <span class="cat-pill-name"><%= g.name %></span>
+      <span class="cat-pill-count"><%= homeCount[g.name] || 0 %></span>
+    </a>
+  <% }); %>
+    <a class="cat-pill cat-pill-more" href="<%- url_for('categories/') %>">全部分类</a>
+  </div>
+</section>
+
+<section class="post-list">
+<% page.posts.each(function(post){ %>
+  <%
+    var raw = post.excerpt || post.content || '';
+    var text = raw.replace(/<pre[\s\S]*?<\/pre>/g, ' ')
+                   .replace(/<[^>]+>/g, ' ')
+                   .replace(/&amp;/g, '&')
+                   .replace(/&#(\d+);/g, function(m, d){ return String.fromCharCode(parseInt(d, 10)); })
+                   .replace(/&#x([0-9a-fA-F]+);/g, function(m, h){ return String.fromCharCode(parseInt(h, 16)); })
+                   .replace(/&nbsp;/g, ' ')
+                   .replace(/&lt;/g, '<')
+                   .replace(/&gt;/g, '>')
+                   .replace(/&quot;/g, '"')
+                   .replace(/\s+/g, ' ')
+                   .trim();
+    var short = text.length > 130 ? text.slice(0, 130) + '…' : text;
+  %>
+  <article class="post-card">
+    <img class="post-icon" src="<%- url_for('images/post-icon.jpg') %>" alt="">
+    <div class="post-body">
+      <div class="post-meta">
+        <time><%- date(post.date, 'YYYY-MM-DD') %></time>
+        <% if(post.categories && post.categories.length){ %>
+          <% post.categories.each(function(cat){ %>
+            <a class="chip" href="<%- url_for(cat.path) %>"><%= cat.name %></a>
+          <% }); %>
+        <% } %>
+      </div>
+      <h2 class="post-card-title">
+        <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+      </h2>
+      <% if(short){ %>
+      <p class="post-excerpt"><%= short %></p>
+      <% } %>
+      <a class="read-more" href="<%- url_for(post.path) %>">阅读全文 →</a>
+    </div>
+  </article>
+<% }); %>
+</section>
+
+<% if(page.total > 1){ %>
+<nav class="pager">
+  <% if(page.prev){ %><a href="<%- url_for(page.prev_link) %>">← 更新的文章</a><% } %>
+  <% if(page.next){ %><a href="<%- url_for(page.next_link) %>">更早的文章 →</a><% } %>
+</nav>
+<% } %>

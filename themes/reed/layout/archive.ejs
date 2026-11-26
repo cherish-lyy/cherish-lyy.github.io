@@ -1,0 +1,31 @@
+<h1 class="page-heading"><%= page.title || '归档' %></h1>
+
+<%
+  var groups = {};
+  var order = [];
+  page.posts.each(function(post){
+    var y = date(post.date, 'YYYY');
+    if(!groups[y]) { groups[y] = []; order.push(y); }
+    groups[y].push(post);
+  });
+  order.sort().reverse();
+%>
+
+<% order.forEach(function(y){ %>
+  <h2 class="year-heading"><%= y %><span class="year-count"><%= groups[y].length %> 篇</span></h2>
+  <ul class="archive-list">
+  <% groups[y].forEach(function(post){ %>
+    <li>
+      <time><%- date(post.date, 'MM-DD') %></time>
+      <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+    </li>
+  <% }); %>
+  </ul>
+<% }); %>
+
+<% if(page.total > 1){ %>
+<nav class="pager">
+  <% if(page.prev){ %><a href="<%- url_for(page.prev_link) %>">← 更新的</a><% } %>
+  <% if(page.next){ %><a href="<%- url_for(page.next_link) %>">更早的 →</a><% } %>
+</nav>
+<% } %>

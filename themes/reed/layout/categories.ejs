@@ -1,0 +1,42 @@
+<h1 class="page-heading"><%= page.title || '分类' %></h1>
+<p class="page-lead">按学习和写作的主题分区。带数字的分类表示已经有文章，点进去看全部。</p>
+
+<%
+  var byName = {};
+  site.categories.each(function(c){ byName[c.name] = c; });
+%>
+
+<div class="cat-tree">
+<% theme.categories.forEach(function(group){ %>
+  <section class="cat-group" id="<%= group.name %>">
+    <header class="cat-group-head">
+      <h2 class="cat-group-name">
+        <% if(byName[group.name]){ %>
+          <a href="<%- url_for(byName[group.name].path) %>"><%= group.name %></a>
+        <% } else { %>
+          <%= group.name %>
+        <% } %>
+      </h2>
+      <% if(byName[group.name]){ %>
+        <span class="cat-group-count"><%= byName[group.name].length %> 篇</span>
+      <% } %>
+    </header>
+    <p class="cat-group-desc"><%= group.desc %></p>
+
+    <% if(group.subs && group.subs.length){ %>
+    <ul class="cat-sublist">
+      <% group.subs.forEach(function(sub){ %>
+        <% var c = byName[sub]; %>
+        <li>
+          <% if(c){ %>
+            <a href="<%- url_for(c.path) %>"><%= sub %><span class="sub-count"><%= c.length %></span></a>
+          <% } else { %>
+            <span class="sub-empty"><%= sub %></span>
+          <% } %>
+        </li>
+      <% }); %>
+    </ul>
+    <% } %>
+  </section>
+<% }); %>
+</div>

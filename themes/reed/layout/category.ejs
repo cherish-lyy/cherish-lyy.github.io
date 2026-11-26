@@ -1,0 +1,16 @@
+<h1 class="page-heading"><%= page.category %> <span class="heading-count"><%= page.posts.length %> 篇</span></h1>
+
+<ul class="archive-list">
+<% page.posts.each(function(post){ %>
+  <li>
+    <time><%- date(post.date, 'YYYY-MM-DD') %></time>
+    <a href="<%- url_for(post.path) %>"><%= post.title %></a>
+  </li>
+<% }); %>
+</ul>
+
+<nav class="pager">
+  <% if(page.prev){ %><a href="<%- url_for(page.prev_link) %>">← 更新的</a><% } %>
+  <% if(page.next){ %><a href="<%- url_for(page.next_link) %>">更早的 →</a><% } %>
+  <a href="<%- url_for('categories/') %>">所有分类</a>
+</nav>

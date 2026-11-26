@@ -1,0 +1,33 @@
+<article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><%= page.title %></h1>
+    <div class="post-meta">
+      <time><%- date(page.date, 'YYYY-MM-DD') %></time>
+      <% if(page.categories && page.categories.length){ %>
+        <% page.categories.each(function(cat){ %>
+          <a class="chip" href="<%- url_for(cat.path) %>"><%= cat.name %></a>
+        <% }); %>
+      <% } %>
+      <% if(page.tags && page.tags.length){ %>
+        <span class="tags">
+        <% page.tags.each(function(tag){ %>
+          <span class="tag">#<%= tag.name %></span>
+        <% }); %>
+        </span>
+      <% } %>
+    </div>
+  </header>
+
+  <nav id="post-toc" class="post-toc"></nav>
+
+  <div class="post-content">
+    <%- page.content %>
+  </div>
+
+  <footer class="post-footer">
+    <a class="back-link" href="<%- url_for('/') %>">← 返回首页</a>
+    <a class="back-link" href="<%- url_for('archives/') %>">查看全部文章</a>
+  </footer>
+
+  <script src="<%- url_for('js/toc.js') %>?v=<%= Date.now() %>" defer></script>
+</article>
