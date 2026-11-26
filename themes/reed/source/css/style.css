@@ -236,6 +236,78 @@ a:hover { opacity: .72; }
 
 .search-results { margin-bottom: 40px; }
 
+.search-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: -14px 0 26px;
+  padding-bottom: 18px;
+  border-bottom: 1px dashed var(--line);
+}
+
+.search-cats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+
+.cat-tag {
+  font-size: 13px;
+  font-family: inherit;
+  padding: 5px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-soft);
+  border-radius: 100px;
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease, border-color .16s ease;
+}
+
+.cat-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+.cat-tag.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.sort-btn {
+  font-size: 13px;
+  font-family: inherit;
+  padding: 5px 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sort-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+.search-item-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.search-item-meta time { font-variant-numeric: tabular-nums; }
+
+.mini-chip {
+  font-size: 11px;
+  line-height: 1.6;
+  padding: 1px 8px;
+  border-radius: 100px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
 .search-count {
   font-size: 13px;
   color: var(--muted);
@@ -877,6 +949,8 @@ a:hover { opacity: .72; }
   .hero-tags span { font-size: 11px; padding: 3px 11px; letter-spacing: .02em; }
   .site-header::after { font-size: 18px; letter-spacing: .2em; color: rgba(47, 93, 124, .055); }
   #search-input { padding: 12px 16px; font-size: 15px; }
+  .search-filters { gap: 8px; margin-top: -10px; }
+  .cat-tag, .sort-btn { font-size: 12px; padding: 4px 11px; }
   .post-icon { width: 38px; height: 38px; }
   .post-toc { padding: 14px 16px; font-size: 14px; }
   .toc-list { max-height: 240px; }
