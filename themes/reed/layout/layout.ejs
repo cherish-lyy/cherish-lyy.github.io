@@ -6,6 +6,10 @@
   <title><%= page.title ? page.title + ' · ' + config.title : config.title + ' · ' + config.subtitle %></title>
   <meta name="description" content="<%= config.description %>">
   <meta name="author" content="<%= config.author %>">
+  <!-- 隐私：跳转到任何外部站点时不发送来源页（Referer） -->
+  <meta name="referrer" content="no-referrer">
+  <!-- 安全：禁止被嵌入 iframe、禁止 base 标签劫持、禁止外发表单 -->
+  <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'; base-uri 'self'; form-action 'self'">
   <link rel="icon" type="image/jpeg" href="<%- url_for('images/avatar.jpg') %>">
   <link rel="stylesheet" href="<%- url_for('css/style.css') %>?v=<%= Date.now() %>">
 </head>
