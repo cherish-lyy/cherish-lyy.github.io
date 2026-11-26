@@ -9,14 +9,13 @@
 
   var box = document.getElementById('search-results');
   var catsBox = document.getElementById('search-cats');
-  var sortBtn = document.getElementById('search-sort');
   var list = document.querySelector('.post-list');
   var strip = document.querySelector('.cat-strip');
   var filters = document.getElementById('search-filters');
 
   var data = null;
   var loading = false;
-  var state = { q: '', cat: '', sort: 'desc' };
+  var state = { q: '', cat: '' };
 
   function load() {
     if (data || loading) return;
@@ -98,9 +97,7 @@
     });
 
     hits.sort(function (a, b) {
-      return state.sort === 'desc'
-        ? (a.date < b.date ? 1 : a.date > b.date ? -1 : 0)
-        : (a.date > b.date ? 1 : a.date < b.date ? -1 : 0);
+      return a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
     });
 
     if (filters) filters.hidden = false;
@@ -130,14 +127,6 @@
     });
     html += '</ul>';
     box.innerHTML = html;
-  }
-
-  if (sortBtn) {
-    sortBtn.addEventListener('click', function () {
-      state.sort = state.sort === 'desc' ? 'asc' : 'desc';
-      sortBtn.textContent = state.sort === 'desc' ? '最新优先 ↓' : '最早优先 ↑';
-      render();
-    });
   }
 
   input.addEventListener('input', render);
