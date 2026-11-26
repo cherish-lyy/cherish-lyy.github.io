@@ -76,6 +76,20 @@
     return esc(s).replace(re, '<mark>$1</mark>');
   }
 
+  function reorderPosts() {
+    var container = document.querySelector('.post-list');
+    if (!container) return;
+    var cards = [].slice.call(container.querySelectorAll('.post-card'));
+    if (!cards.length) return;
+    cards.sort(function (a, b) {
+      var da = a.getAttribute('data-date') || '';
+      var db = b.getAttribute('data-date') || '';
+      if (state.sort === 'asc') return da > db ? 1 : da < db ? -1 : 0;
+      return da < db ? 1 : da > db ? -1 : 0;
+    });
+    cards.forEach(function (c) { container.appendChild(c); });
+  }
+
   function render() {
     var q = (input.value || '').trim();
     state.q = q;
@@ -137,9 +151,13 @@
     sortBtn.addEventListener('click', function () {
       state.sort = state.sort === 'asc' ? 'desc' : 'asc';
       sortBtn.textContent = state.sort === 'asc' ? '最早优先 ↑' : '最新优先 ↓';
+      reorderPosts();
       render();
     });
   }
+
+  // 页面加载时先按默认顺序（最早优先）排一次首页列表
+  reorderPosts();
 
   input.addEventListener('input', render);
   input.addEventListener('focus', load);
